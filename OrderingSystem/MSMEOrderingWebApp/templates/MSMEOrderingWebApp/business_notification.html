@@ -1,0 +1,25 @@
+{% extends 'MSMEOrderingWebApp/business_owner_base.html' %}
+
+{% block title %}Notifications{% endblock %}
+
+{% block content %}
+    <h2>NOTIFICATIONS</h2>
+    <h3>PENDING ORDERS</h3>
+
+    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Date and Time</th>
+                <th>Customer Details</th>
+                <th>Ordered Items</th>
+                <th>Total</th>
+                <th>Payment Method</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Order rows will be inserted here dynamically -->
+        </tbody>
+    </table>
+{% endblock %}

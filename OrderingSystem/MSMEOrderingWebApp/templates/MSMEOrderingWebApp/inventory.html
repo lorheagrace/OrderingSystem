@@ -1,0 +1,33 @@
+{% extends 'MSMEOrderingWebApp/business_owner_base.html' %}
+
+{% block title %}Inventory{% endblock %}
+
+{% block content %}
+    <h2>INVENTORY</h2>
+    
+    <h3>ADD PRODUCT</h3>
+
+    <!-- Product Category Addition -->
+    <label for="new_category">New Category</label><br>
+    <input type="text" id="new_category" name="new_category">
+    <button type="button">Add Product Category</button><br><br>
+
+    <!-- Product Form -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <label for="product_image">Upload Product Image (jpg, png)</label><br>
+        <input type="file" id="product_image" name="product_image" accept=".jpg, .jpeg, .png"><br><br>
+
+        <label for="product_name">Product Name</label><br>
+        <input type="text" id="product_name" name="product_name"><br><br>
+
+        <label for="product_category">Product Category</label><br>
+        <input type="text" id="product_category" name="product_category"><br><br>
+
+        <label for="price">Price</label><br>
+        <input type="number" id="price" name="price" step="0.01" min="0"><br><br>
+
+        <button type="submit">Add Product</button>
+    </form>
+{% endblock %}

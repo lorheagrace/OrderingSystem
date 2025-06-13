@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+</head>
+<body>
+
+    <h2>USER REGISTRATION</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="first_name">First Name</label><br>
+        <input type="text" id="first_name" name="first_name"><br><br>
+
+        <label for="last_name">Last Name</label><br>
+        <input type="text" id="last_name" name="last_name"><br><br>
+
+        <label for="contact_number">Contact Number</label><br>
+        <input type="text" id="contact_number" name="contact_number"><br><br>
+
+        <label for="email">Email Address</label><br>
+        <input type="email" id="email" name="email"><br><br>
+
+        <label for="city">City</label><br>
+        <input type="text" id="city" name="city"><br><br>
+
+        <label for="province">Province</label><br>
+        <input type="text" id="province" name="province"><br><br>
+
+        <label for="zipcode">Zipcode</label><br>
+        <input type="text" id="zipcode" name="zipcode"><br><br>
+
+        <label for="password">Password</label><br>
+        <input type="password" id="password" name="password"><br><br>
+
+        <label for="confirm_password">Confirm Password</label><br>
+        <input type="password" id="confirm_password" name="confirm_password"><br><br>
+
+        <button type="submit">Register</button><br><br>
+
+        <a href="{% url 'login' %}">GO BACK TO LOGIN</a>
+    </form>
+
+</body>
+</html>

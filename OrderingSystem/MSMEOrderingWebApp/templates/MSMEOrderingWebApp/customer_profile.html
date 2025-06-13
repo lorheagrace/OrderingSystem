@@ -1,0 +1,40 @@
+{% extends 'MSMEOrderingWebApp/customer_base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+    <h2>PROFILE</h2>
+
+    <!-- Profile Image Upload -->
+    <div>
+        <label for="profile_image">Upload Image:</label>
+        <input type="file" id="profile_image" name="profile_image" accept="image/*">
+    </div>
+    <br>
+
+    <!-- Personal Information -->
+    <h3>Personal Information</h3>
+    <p><strong>Name:</strong> <!-- Display user name here --></p>
+    <p><strong>Email:</strong> <!-- Display user email here --></p>
+    <p><strong>Contact Number:</strong> <!-- Display contact number --></p>
+    <p><strong>Address:</strong> <!-- Display address --></p>
+
+    <button type="button">Edit Details</button>
+    <button type="button">Save Changes</button>
+    <button type="button">Change Password</button>
+
+    <hr>
+
+    <!-- Purchase History -->
+    <h3>Purchase History</h3>
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <th>Order ID</th>
+            <th>Date and Time</th>
+            <th>Ordered Items</th>
+            <th>Total</th>
+            <th>Status</th>
+        </tr>
+        <!-- Purchase history rows will go here -->
+    </table>
+{% endblock %}

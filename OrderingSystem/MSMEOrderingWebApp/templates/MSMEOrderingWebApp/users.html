@@ -1,0 +1,29 @@
+{% extends 'MSMEOrderingWebApp/business_owner_base.html' %}
+
+{% block title %}Registered Users{% endblock %}
+
+{% block content %}
+    <h2>REGISTERED USERS</h2>
+
+    <!-- Search Section -->
+    <label for="search">Search</label>
+    <input type="text" id="search" name="search">
+    <button type="submit">Search</button>
+
+    <br><br>
+
+    <!-- Users Table -->
+    <table border="1" cellspacing="0" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- No data yet -->
+        </tbody>
+    </table>
+{% endblock %}

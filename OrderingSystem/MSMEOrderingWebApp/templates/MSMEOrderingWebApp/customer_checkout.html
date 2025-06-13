@@ -1,0 +1,42 @@
+{% extends 'MSMEOrderingWebApp/customer_base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+    <h2>CHECKOUT</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <h3>Recipient</h3>
+        <input type="text" name="recipient" placeholder="Enter recipient name"><br><br>
+
+        <h3>Address</h3>
+        <textarea name="address" placeholder="Enter delivery address" rows="3" cols="40"></textarea><br><br>
+
+        <h3>Order Type</h3>
+        <input type="radio" name="order_type" value="pickup" id="pickup">
+        <label for="pickup">Pickup</label><br>
+        <input type="radio" name="order_type" value="delivery" id="delivery">
+        <label for="delivery">Delivery</label><br><br>
+
+        <h3>Payment Method</h3>
+        <input type="radio" name="payment_method" value="cash" id="cash">
+        <label for="cash">Cash</label><br>
+        <input type="radio" name="payment_method" value="online" id="online">
+        <label for="online">Online Payment</label><br><br>
+
+        <button type="button">View Online Payment Details</button><br><br>
+        <label for="proof">Attach Proof of Online Payment</label><br>
+        <input type="file" name="proof" id="proof" accept=".jpg, .png, .pdf"><br><br>
+
+        <h3>Order Summary</h3>
+        <!-- Order summary content will go here -->
+
+        <h3>Additional Notes</h3>
+        <textarea name="notes" placeholder="Write any special instructions here" rows="3" cols="40"></textarea><br><br>
+
+        <button type="button" onclick="history.back()">Back</button>
+        <button type="submit">Place Order</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+
+    <h2>LOGIN</h2>
+
+    <label for="email">Email Address</label><br>
+    <input type="email" id="email" name="email"><br><br>
+
+    <label for="password">Password</label><br>
+    <input type="password" id="password" name="password"><br><br>
+
+    <button type="submit">Login</button><br><br>
+
+    <a href="{% url 'register_user' %}">Don't have an account yet? Register.</a><br>
+    <a href="#">Forgot password?</a>
+
+</body>
+</html>

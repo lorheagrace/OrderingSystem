@@ -1,0 +1,52 @@
+{% extends 'MSMEOrderingWebApp/business_owner_base.html' %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+    <h2>SETTINGS</h2>
+
+    <!-- Business Logo Upload -->
+    <label for="logo">Business Logo</label><br>
+    <input type="file" id="logo" name="logo" accept="image/png, image/jpeg"><br><br>
+
+    <!-- Business Name -->
+    <label for="business_name">Business Name</label><br>
+    <input type="text" id="business_name" name="business_name"><br><br>
+
+    <!-- Opening and Closing Time -->
+    <label for="opening_time">Opening Time</label><br>
+    <input type="time" id="opening_time" name="opening_time"><br><br>
+
+    <label for="closing_time">Closing Time</label><br>
+    <input type="time" id="closing_time" name="closing_time"><br><br>
+
+    <!-- Store Address -->
+    <label for="store_address">Store Address</label><br>
+    <input type="text" id="store_address" name="store_address"><br><br>
+
+    <!-- Mode of Service -->
+    <label>Mode of Service</label><br>
+    <input type="checkbox" id="dinein" name="mode_service" value="Dine-in">
+    <label for="dinein">Dine-in</label><br>
+    <input type="checkbox" id="takeout" name="mode_service" value="Takeout">
+    <label for="takeout">Takeout</label><br>
+    <input type="checkbox" id="pickup" name="mode_service" value="Pickup">
+    <label for="pickup">Pickup</label><br>
+    <input type="checkbox" id="delivery" name="mode_service" value="Delivery">
+    <label for="delivery">Delivery</label><br><br>
+
+    <!-- Payment Method -->
+    <label>Payment Method</label><br>
+    <input type="checkbox" id="cash" name="payment_method" value="Cash">
+    <label for="cash">Cash</label><br>
+    <input type="checkbox" id="online" name="payment_method" value="Online Payment">
+    <label for="online">Online Payment</label><br><br>
+
+    <!-- Online Payment Setup -->
+    <button type="button">Setup Online Payment Details</button><br><br>
+
+    <!-- Action Buttons -->
+    <button type="button">Change Password</button><br><br>
+    <button type="button">Edit Details</button>
+    <button type="submit">Save Changes</button>
+{% endblock %}
