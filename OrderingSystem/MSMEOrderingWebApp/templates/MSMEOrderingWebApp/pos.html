@@ -1,7 +1,80 @@
 {% extends 'MSMEOrderingWebApp/business_owner_base.html' %}
-
 {% block title %}Point-of-Sale{% endblock %}
 
 {% block content %}
-    <h2>POINT-OF-SALE</h2>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<h2 class="mb-4">POINT-OF-SALE</h2>
+
+<div class="d-flex justify-content-between align-items-center bg-dark text-white p-3 rounded">
+    <div>
+        <label><input type="radio" name="orderType" id="dineIn" value="dine-in" checked> Dine in</label>
+        <label class="ms-3"><input type="radio" name="orderType" id="takeOut" value="takeout"> Takeout</label>
+    </div>
+    <div>
+        <a href="#" class="text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-cart4" viewBox="0 0 16 16">
+                <path d="M0 1.5A.5.5 0 0 1 .5 1h1a.5.5 0 0 1 .485.379L2.89 5H14.5a.5.5 0 0 1 .49.598l-1.5 7A.5.5 0 0 1 13 13H4a.5.5 0 0 1-.49-.402L1.01 2H.5a.5.5 0 0 1-.5-.5zM3.14 6l1.25 5h8.22l1.25-5H3.14z"/>
+                <path d="M5.5 12a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+            </svg>
+        </a>
+    </div>
+</div>
+
+<div class="row my-3">
+    <div class="col-md-6 d-flex gap-2">
+        <input type="text" class="form-control" id="searchInput" placeholder="Search" onkeyup="filterProducts()">
+        <button class="btn btn-dark" onclick="filterProducts()">🔍</button>
+    </div>
+    <div class="col-md-6">
+        <select id="categoryFilter" class="form-select" onchange="filterProducts()">
+            <option value="">Show All</option>
+            {% for cat in categories %}
+                <option value="{{ cat.name }}">{{ cat.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<div class="row" id="productGrid">
+    {% for product in products %}
+    <div class="col-6 col-md-3 mb-4 product-card" data-name="{{ product.name }}" data-category="{{ product.category }}">
+        <div class="card h-100">
+            {% if product.image %}
+            <div class="ratio ratio-1x1" style="overflow: hidden;">
+                <img src="{{ product.image.url }}" class="w-100 h-100" alt="Product Image" style="object-fit: cover;">
+            </div>
+            {% else %}
+            <div class="bg-secondary text-white d-flex align-items-center justify-content-center ratio ratio-1x1">
+                No Image
+            </div>
+            {% endif %}
+            <div class="card-body text-center">
+                {{ product.name }}<br>
+                {{ product.price_range }}
+            </div>
+            <div class="card-footer text-center p-2">
+                <button class="btn btn-dark btn-sm w-100">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    function filterProducts() {
+        const searchValue = document.getElementById('searchInput').value.toLowerCase();
+        const categoryValue = document.getElementById('categoryFilter').value;
+
+        const cards = document.querySelectorAll('.product-card');
+        cards.forEach(card => {
+            const name = card.dataset.name.toLowerCase();
+            const category = card.dataset.category;
+            const matchesSearch = name.includes(searchValue);
+            const matchesCategory = categoryValue === "" || category === categoryValue;
+
+            card.style.display = (matchesSearch && matchesCategory) ? "block" : "none";
+        });
+    }
+</script>
 {% endblock %}

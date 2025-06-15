@@ -21,4 +21,8 @@ urlpatterns = [
     path('CustomerCheckout/', views.customer_checkout, name='customer_checkout'),
     path('CustomerNotifications/', views.customer_notifications, name='customer_notifications'),
     path('CustomerProfile/', views.customer_profile, name='customer_profile'),
+
+    path('delete-product/<int:product_id>/', views.delete_product, name='delete_product'),
+    path('edit-price/', views.edit_product_price, name='edit_product_price'),
+
 ]

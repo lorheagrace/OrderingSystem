@@ -78,11 +78,14 @@ WSGI_APPLICATION = 'OrderingSystem.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'orderingsystem',
+        'USER': 'root',
+        'PASSWORD': '',  # It's okay if you're using no password for local testing
+        'HOST': 'localhost',
+        'PORT': '3307',  # Optional: but good to include explicitly
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -120,6 +123,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 MEDIA_URL = '/Media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
