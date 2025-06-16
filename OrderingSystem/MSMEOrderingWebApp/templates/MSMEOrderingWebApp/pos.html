@@ -61,6 +61,38 @@
     {% endfor %}
 </div>
 
+<!-- Add to Cart Modal -->
+<div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addToCartModalLabel">ADD TO CART</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Product:</strong> <span id="modalProductName"></span></p>
+        <p><strong>Price:</strong> ₱<span id="modalPrice"></span></p>
+        <div class="mb-2">
+            <label for="modalVariation" class="form-label">Variation:</label>
+            <select class="form-select" id="modalVariation"></select>
+        </div>
+        <div class="mb-2">
+            <label for="modalQuantity" class="form-label">Quantity:</label>
+            <input type="number" class="form-control" id="modalQuantity" min="1" value="1">
+        </div>
+        <hr>
+        <p><strong>Total:</strong> ₱<span id="modalTotal">0.00</span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" onclick="addToCartConfirmed()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Embed JSON data -->
+{{ all_products|json_script:"product-variations-data" }}
+
 <script>
     function filterProducts() {
         const searchValue = document.getElementById('searchInput').value.toLowerCase();
@@ -75,6 +107,69 @@
 
             card.style.display = (matchesSearch && matchesCategory) ? "block" : "none";
         });
+    }
+
+    let selectedProduct = null;
+
+    // Parse JSON and group by product name
+    const rawData = JSON.parse(document.getElementById('product-variations-data').textContent);
+    const productVariations = {};
+    rawData.forEach(item => {
+        if (!productVariations[item.name]) {
+            productVariations[item.name] = [];
+        }
+        productVariations[item.name].push({
+            name: item.variation_name,
+            price: item.price,
+        });
+    });
+
+    document.querySelectorAll('.product-card .btn-dark').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const card = btn.closest('.product-card');
+            const name = card.dataset.name;
+
+            selectedProduct = name;
+            const variations = productVariations[name] || [];
+
+            document.getElementById('modalProductName').textContent = name;
+            const variationSelect = document.getElementById('modalVariation');
+            variationSelect.innerHTML = "";
+            variations.forEach(v => {
+                const option = document.createElement('option');
+                option.value = v.price;
+                option.textContent = `${v.name} (₱${parseFloat(v.price).toFixed(2)})`;
+                variationSelect.appendChild(option);
+            });
+
+            document.getElementById('modalPrice').textContent = variationSelect.options[0]?.value || "0.00";
+            document.getElementById('modalQuantity').value = 1;
+            updateModalTotal();
+
+            const modal = new bootstrap.Modal(document.getElementById('addToCartModal'));
+            modal.show();
+        });
+    });
+
+    document.getElementById('modalVariation').addEventListener('change', updateModalTotal);
+    document.getElementById('modalQuantity').addEventListener('input', updateModalTotal);
+
+    function updateModalTotal() {
+        const price = parseFloat(document.getElementById('modalVariation').value || 0);
+        const quantity = parseInt(document.getElementById('modalQuantity').value || 1);
+        const total = (price * quantity).toFixed(2);
+        document.getElementById('modalTotal').textContent = total;
+        document.getElementById('modalPrice').textContent = price.toFixed(2);
+    }
+
+    function addToCartConfirmed() {
+        const productName = selectedProduct;
+        const variation = document.getElementById('modalVariation').selectedOptions[0].textContent;
+        const quantity = document.getElementById('modalQuantity').value;
+        const total = document.getElementById('modalTotal').textContent;
+
+        alert(`Added to cart:\n${productName} - ${variation}\nQty: ${quantity}\nTotal: ₱${total}`);
+        bootstrap.Modal.getInstance(document.getElementById('addToCartModal')).hide();
     }
 </script>
 {% endblock %}

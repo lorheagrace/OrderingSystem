@@ -3,6 +3,9 @@ from .models import User, Products, ProductCategory
 from django.contrib import messages
 from django.db.models import Min, Max
 from collections import defaultdict
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import JsonResponse
+from django.core import serializers
 
 def login_view(request):
     return render(request, 'MSMEOrderingWebApp/login.html', {
@@ -107,9 +110,15 @@ def delete_product(request, product_id):
     messages.success(request, "Product deleted successfully.")
     return redirect('inventory')
 
+def toggle_availability(request, product_id):
+    product = get_object_or_404(Products, id=product_id)
+    if request.method == 'POST':
+        product.available = not product.available
+        product.save()
+    return redirect('inventory') 
 
 def pos(request):
-    products = Products.objects.select_related('category').all()
+    products = Products.objects.select_related('category').filter(available=True)
     categories = ProductCategory.objects.all()
 
     grouped = defaultdict(list)
@@ -132,7 +141,8 @@ def pos(request):
 
     return render(request, 'MSMEOrderingWebApp/pos.html', {
         'products': unique_products,
-        'categories': categories
+        'categories': categories,
+        'all_products': list(products.values('name', 'variation_name', 'price')),  # use this for json_script
     })
 
 def delivery(request):
@@ -151,7 +161,32 @@ def business_notifications(request):
     return render(request, 'MSMEOrderingWebApp/business_notification.html')
 
 def customer_home(request):
-    return render(request, 'MSMEOrderingWebApp/customer_home.html')
+    products = Products.objects.select_related('category').all()
+    categories = ProductCategory.objects.all()
+
+    grouped = defaultdict(list)
+    for p in products:
+        grouped[p.name].append(p)
+
+    unique_products = []
+    for name, group in grouped.items():
+        min_price = min(p.price for p in group)
+        max_price = max(p.price for p in group)
+        category = group[0].category
+        image = group[0].image
+
+        unique_products.append({
+            'name': name,
+            'price_range': f"₱{min_price:.2f}" if min_price == max_price else f"₱{min_price:.2f} - ₱{max_price:.2f}",
+            'category': category.name,
+            'image': image,
+        })
+
+    return render(request, 'MSMEOrderingWebApp/customer_home.html', {
+        'products': unique_products,
+        'categories': categories,
+        'all_products': list(products.values('name', 'variation_name', 'price')),  # use this for json_script
+    })
 
 def customer_reviews(request):
     return render(request, 'MSMEOrderingWebApp/customer_reviews.html')

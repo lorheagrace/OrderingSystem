@@ -1,22 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    
+    <!-- Load Static Files -->
+    {% load static %}
+    
+    <!-- Link to Montserrat font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Apply Montserrat font globally with font weight */
+        body, html {
+            font-family: 'Montserrat', sans-serif;
+            height: 100%;
+            margin: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            color: black; /* Set default text color to black */
+        }
+        .bg-image {
+            background-image: url("{% static 'Media/login_bg.jpg' %}");
+            background-size: cover; /* Cover the entire container */
+            background-position: center; /* Center the image */
+            background-attachment: fixed; /* Fix the background image on scroll */
+            height: 100vh; /* Full viewport height */
+        }
+        .login-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-container input {
+            margin-bottom: 1rem;
+            width: 100%;
+            color: black; /* Input text color */
+            border-color: #ced4da; /* Set input border color */
+        }
+        .login-container button {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 16px;
+            font-weight: 600; /* Set font weight for button (semi-bold) */
+            color: white; /* Button text color (white) */
+            background-color: #161616; /* Custom background color (green) */
+            border: none;
+            border-radius: 5px; /* Optional: adds rounded corners */
+        }
+        .login-container button:hover {
+            background-color: #252525; /* Change link color on hover */
+        }
+        .login-container h2 {
+            font-weight: 700; /* Set font weight for heading (bold) */
+            color: black; /* Heading text color */
+        }
+        .login-container label {
+            font-weight: 600; /* Semi-bold for Email and Password labels */
+            color: black; /* Label text color */
+        }
+        .login-container a {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: black; /* Link text color */
+            font-weight: 400; /* Set font weight for links (normal) */
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px; /* Center the logo and add margin below */
+            max-width: 100%; /* Ensure logo scales down on smaller screens */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
 </head>
 <body>
 
-    <h2>LOGIN</h2>
+    <div class="bg-image">
+        <div class="login-container">
+            <!-- Logo at the top -->
+            <img src="{% static 'Media/logo.png' %}" alt="Logo" class="logo">
+            
+            <h2 class="text-center mb-4">LOG IN</h2>
 
-    <label for="email">Email Address</label><br>
-    <input type="email" id="email" name="email"><br><br>
+            <form action="#" method="POST">
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-Mail</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+                </div>
 
-    <label for="password">Password</label><br>
-    <input type="password" id="password" name="password"><br><br>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                    <a href="#" class="d-block text-end">Forgot password?</a>
+                </div>
 
-    <button type="submit">Login</button><br><br>
+                <button type="submit" class="btn btn-primary">LOGIN</button>
 
-    <a href="{% url 'register_user' %}">Don't have an account yet? Register.</a><br>
-    <a href="#">Forgot password?</a>
+                <a href="{% url 'register_user' %}" class="d-block mt-3">
+                    Don't have an account yet? <span style="font-weight: bold; text-decoration: underline;">Sign Up</span>
+                </a>
 
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

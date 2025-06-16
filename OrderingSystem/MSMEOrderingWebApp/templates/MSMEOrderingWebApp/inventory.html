@@ -75,9 +75,16 @@
             Variation: {{ product.variation_name }}<br>
             Price: ₱{{ product.price }}
         </div>
-        <div style="margin-left: auto;">
+        <div style="margin-left: auto; text-align: right;">
             <a href="#" onclick="openEditModal('{{ product.id }}', '{{ product.price }}')">Edit</a> |
-            <a href="{% url 'delete_product' product.id %}" onclick="return confirm('Are you sure you want to delete this product?')">Delete</a>
+            <a href="{% url 'delete_product' product.id %}" onclick="return confirm('Are you sure you want to delete this product?')">Delete</a><br>
+            <form method="post" action="{% url 'toggle_availability' product.id %}">
+                {% csrf_token %}
+                <div class="form-check form-switch mt-1">
+                    <input class="form-check-input" type="checkbox" onchange="this.form.submit()" {% if product.available %}checked{% endif %}>
+                    <label class="form-check-label">Available</label>
+                </div>
+            </form>
         </div>
     </div>
     {% empty %}

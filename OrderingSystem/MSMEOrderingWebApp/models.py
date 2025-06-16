@@ -27,6 +27,7 @@ class Products(models.Model):
     name = models.CharField(max_length=255)
     variation_name = models.CharField(max_length=100, default='Default')  
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    available = models.BooleanField(default=True)  # NEW FIELD
 
     def __str__(self):
         return f"{self.name} - {self.variation_name}"
