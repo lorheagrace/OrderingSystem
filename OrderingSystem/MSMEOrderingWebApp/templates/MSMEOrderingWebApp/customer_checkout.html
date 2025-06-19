@@ -8,11 +8,9 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        <h3>Recipient</h3>
-        <input type="text" name="recipient" placeholder="Enter recipient name"><br><br>
+        <h3>Recipient: (fetch dito)</h3>
 
-        <h3>Address</h3>
-        <textarea name="address" placeholder="Enter delivery address" rows="3" cols="40"></textarea><br><br>
+        <h3>Address: (fetch dito)</h3>
 
         <h3>Order Type</h3>
         <input type="radio" name="order_type" value="pickup" id="pickup">
@@ -28,7 +26,7 @@
 
         <button type="button">View Online Payment Details</button><br><br>
         <label for="proof">Attach Proof of Online Payment</label><br>
-        <input type="file" name="proof" id="proof" accept=".jpg, .png, .pdf"><br><br>
+        <input type="file" name="proof" id="proof" accept=".jpg"><br><br>
 
         <h3>Order Summary</h3>
         <!-- Order summary content will go here -->

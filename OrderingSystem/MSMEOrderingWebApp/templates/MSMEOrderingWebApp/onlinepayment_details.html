@@ -1,0 +1,68 @@
+{% extends 'MSMEOrderingWebApp/business_owner_base.html' %}
+
+{% block title %}Online Payment Details{% endblock %}
+
+{% block content %}
+<h2>ONLINE PAYMENT DETAILS</h2>
+
+<!-- Tabs -->
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#gcash">GCASH</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#paymaya">PAYMAYA</a>
+    </li>
+</ul>
+
+<!-- Tab Contents -->
+<div class="tab-content mt-3" style="background-color: #d1d1d1; padding: 20px; max-width: 500px; margin: auto; border-radius: 10px;">
+
+    <!-- GCASH Tab -->
+    <div class="tab-pane fade show active" id="gcash">
+        <div class="text-center mb-3">
+            <div style="width: 100%; aspect-ratio: 1 / 1; border: 1px solid #000; display: flex; align-items: center; justify-content: center; background-color: #fff;">
+                <span style="font-size: 50px;">+</span>
+            </div>
+            <input type="file" accept="image/*" class="form-control mt-2">
+            <p class="mt-1">Upload QR Code</p>
+        </div>
+
+        <label><strong>Recipient’s Name</strong></label>
+        <input type="text" class="form-control mb-2">
+
+        <label><strong>Number</strong></label>
+        <input type="text" class="form-control mb-3">
+
+        <div class="d-flex justify-content-center gap-2 mb-2">
+            <button class="btn btn-dark px-4">EDIT</button>
+            <button class="btn btn-dark px-4">SAVE</button>
+            <button class="btn btn-dark px-4">REMOVE</button>
+        </div>
+    </div>
+
+    <!-- PAYMAYA Tab -->
+    <div class="tab-pane fade" id="paymaya">
+        <div class="text-center mb-3">
+            <div style="width: 100%; aspect-ratio: 1 / 1; border: 1px solid #000; display: flex; align-items: center; justify-content: center; background-color: #fff;">
+                <span style="font-size: 50px;">+</span>
+            </div>
+            <input type="file" accept="image/*" class="form-control mt-2">
+            <p class="mt-1">Upload QR Code</p>
+        </div>
+
+        <label><strong>Recipient’s Name</strong></label>
+        <input type="text" class="form-control mb-2">
+
+        <label><strong>Number</strong></label>
+        <input type="text" class="form-control mb-3">
+
+        <div class="d-flex justify-content-center gap-2 mb-2">
+            <button class="btn btn-dark px-4">EDIT</button>
+            <button class="btn btn-dark px-4">SAVE</button>
+            <button class="btn btn-dark px-4">REMOVE</button>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

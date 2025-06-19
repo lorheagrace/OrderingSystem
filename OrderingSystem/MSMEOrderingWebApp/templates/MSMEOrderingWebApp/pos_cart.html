@@ -1,0 +1,48 @@
+{% extends 'MSMEOrderingWebApp/business_owner_base.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">🛒 CART</h2>
+
+    <!-- Cart Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle text-center bg-white">
+            <thead class="table-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Product Name</th>
+                    <th style="width: 120px;">Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="my-4">
+        <h5>Payment Method</h5>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="payment_method" id="cashOption" value="cash" checked>
+            <label class="form-check-label" for="cashOption">Cash</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="payment_method" id="onlineOption" value="online">
+            <label class="form-check-label" for="onlineOption">Online Payment</label>
+        </div>
+    </div>
+
+    <!-- Subtotal -->
+    <div class="d-flex justify-content-end mb-4">
+        <h5>Subtotal: ₱<span id="subtotal">0.00</span></h5>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-between">
+        <button class="btn btn-outline-dark">← Back</button>
+        <button class="btn btn-dark">Place Order</button>
+    </div>
+</div>
+
+{% endblock %}

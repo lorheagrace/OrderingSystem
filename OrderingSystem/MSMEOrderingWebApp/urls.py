@@ -8,11 +8,18 @@ urlpatterns = [
 
     path('BusinessDashboard/', views.dashboard, name='dashboard'),
     path('ManageInventory/', views.inventory, name='inventory'),
+
     path('Point-of-Sale/', views.pos, name='pos'),
+    path('Point-of-Sale/Cart/', views.pos_cart_view, name='pos_cart'),
+
     path('Delivery/', views.delivery, name='delivery'),
     path('Reviews/', views.reviews, name='reviews'),
     path('RegisteredUsers/', views.users, name='users'),
+
     path('Settings/', views.settings, name='settings'),
+    path('settings/online-payment/', views.online_payment_details, name='online_payment_details'),
+    path('settings/change-password/', views.change_password, name='change_password'),
+
     path('BusinessNotifications/', views.business_notifications, name='business_notifications'),
 
     path('CustomerHomepage/', views.customer_home, name='customer_home'),

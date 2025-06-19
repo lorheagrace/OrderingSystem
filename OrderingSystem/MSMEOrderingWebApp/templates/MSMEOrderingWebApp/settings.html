@@ -43,10 +43,11 @@
     <label for="online">Online Payment</label><br><br>
 
     <!-- Online Payment Setup -->
-    <button type="button">Setup Online Payment Details</button><br><br>
+    <!-- Setup Online Payment Details -->
+    <a href="{% url 'online_payment_details' %}" class="btn btn-secondary">Setup Online Payment Details</a><br><br>
 
     <!-- Action Buttons -->
-    <button type="button">Change Password</button><br><br>
+    <a href="{% url 'change_password' %}" class="btn btn-secondary">Change Password</a><br><br>
     <button type="button">Edit Details</button>
     <button type="submit">Save Changes</button>
 {% endblock %}

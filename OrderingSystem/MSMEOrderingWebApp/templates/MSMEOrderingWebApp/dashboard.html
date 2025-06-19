@@ -122,6 +122,14 @@
         background-color: black;
         color: white;
     }
+    .modal-content {
+        font-family: Arial, sans-serif;
+    }
+    .btn-dark {
+        background-color: black;
+        color: white;
+        font-weight: bold;
+    }
 </style>
 
 <div class="container-fluid">
@@ -153,10 +161,51 @@
     </div>
 
     <div class="text-end">
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn-dark">📄 Generate Report</button>
-        </form>
+        <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#generateReportModal">📄 Generate Report</button>
+    </div>
+
+    <!-- Report Modal -->
+    <div class="modal fade" id="generateReportModal" tabindex="-1" aria-labelledby="generateReportLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="generateReportLabel"><b>GENERATE REPORT</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="reportForm">
+                        <label><b>Transaction Type</b></label>
+                        <select class="form-select mb-3" name="transaction_type">
+                            <option value="all">All Records</option>
+                            <option value="sales">Sales</option>
+                            <option value="delivery">Delivery</option>
+                        </select>
+
+                        <label><b>Date Filter</b></label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="date_filter" value="all" id="filterAll" checked>
+                            <label class="form-check-label" for="filterAll">All</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="date_filter" value="daily" id="filterDaily">
+                            <label class="form-check-label" for="filterDaily">Daily</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="date_filter" value="weekly" id="filterWeekly">
+                            <label class="form-check-label" for="filterWeekly">Weekly</label>
+                        </div>
+                        <div class="form-check form-check-inline mb-3">
+                            <input class="form-check-input" type="radio" name="date_filter" value="monthly" id="filterMonthly">
+                            <label class="form-check-label" for="filterMonthly">Monthly</label>
+                        </div>
+
+                        <input type="date" id="dateInput" class="form-control mb-3" disabled>
+
+                        <button type="submit" class="btn btn-dark w-100">GENERATE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="tabs">
@@ -288,5 +337,44 @@
         document.getElementById(tabId).classList.add('active');
         event.target.classList.add('active');
     }
+        function showTab(tabId) {
+        const tabs = document.querySelectorAll('.tab-content');
+        const buttons = document.querySelectorAll('.tab-button');
+
+        tabs.forEach(tab => tab.classList.remove('active'));
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        document.getElementById(tabId).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    // Date Filter Logic
+    document.addEventListener('DOMContentLoaded', function () {
+        const dateInput = document.getElementById('dateInput');
+        const filterRadios = document.querySelectorAll('input[name="date_filter"]');
+
+        filterRadios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                const today = new Date();
+                let targetDate = new Date(today);
+
+                if (this.value === 'all') {
+                    dateInput.disabled = true;
+                    dateInput.value = '';
+                } else if (this.value === 'daily') {
+                    dateInput.disabled = false;
+                    dateInput.valueAsDate = today;
+                } else if (this.value === 'weekly') {
+                    targetDate.setDate(today.getDate() + 7);
+                    dateInput.value = targetDate.toISOString().split('T')[0];
+                    dateInput.disabled = true;
+                } else if (this.value === 'monthly') {
+                    targetDate.setDate(today.getDate() + 30);
+                    dateInput.value = targetDate.toISOString().split('T')[0];
+                    dateInput.disabled = true;
+                }
+            });
+        });
+    });
 </script>
 {% endblock %}

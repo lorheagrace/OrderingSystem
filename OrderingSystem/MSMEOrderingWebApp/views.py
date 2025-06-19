@@ -145,6 +145,9 @@ def pos(request):
         'all_products': list(products.values('name', 'variation_name', 'price')),  # use this for json_script
     })
 
+def pos_cart_view(request):
+    return render(request, 'MSMEOrderingWebApp/pos_cart.html')
+
 def delivery(request):
     return render(request, 'MSMEOrderingWebApp/delivery.html')
 
@@ -202,3 +205,9 @@ def customer_notifications(request):
 
 def customer_profile(request):
     return render(request, 'MSMEOrderingWebApp/customer_profile.html')
+
+def online_payment_details(request):
+    return render(request, 'MSMEOrderingWebApp/onlinepayment_details.html')
+
+def change_password(request):
+    return render(request, 'MSMEOrderingWebApp/change_password.html')
